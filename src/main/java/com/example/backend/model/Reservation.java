@@ -17,6 +17,8 @@ public class Reservation {
 private Long reservationId;
 private String customerName;
 private String customerEmail;
+private Long showingId;
+private Long seatId;
 
     public Reservation() {
     }
