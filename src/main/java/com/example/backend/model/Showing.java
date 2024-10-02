@@ -1,9 +1,6 @@
 package com.example.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +19,10 @@ private LocalDate date;
 private LocalTime startTime;
 private LocalTime endTime;
 private String movieTitle;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id", nullable = false)
+    private Movie movie;
 
     public Showing() {
     }

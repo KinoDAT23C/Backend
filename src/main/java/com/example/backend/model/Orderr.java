@@ -13,13 +13,13 @@ import java.math.BigDecimal;
 @Setter
 
 @Entity
-public class Order {
+public class Orderr {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long orderId;
 
 private int quantity;
 private BigDecimal totalPrice;
-    public Order() {
+    public Orderr() {
     }
 }
