@@ -27,4 +27,5 @@ public class ShowingController {
         List<Showing> showings = showingRepository.findByMovie(movie);
         return ResponseEntity.ok(showings);
     }
+
 }
