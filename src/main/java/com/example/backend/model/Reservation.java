@@ -1,9 +1,6 @@
 package com.example.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,8 +14,14 @@ public class Reservation {
 private Long reservationId;
 private String customerName;
 private String customerEmail;
-private Long showingId;
-private Long seatId;
+
+@ManyToOne
+@JoinColumn(name = "showing_id", nullable = false)
+private Showing showing;
+
+@ManyToOne
+@JoinColumn(name = "seat_id", nullable = false)
+private Seat seat;
 
     public Reservation() {
     }

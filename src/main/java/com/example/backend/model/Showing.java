@@ -15,14 +15,18 @@ public class Showing {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long showingId;
 
-private LocalDate date;
-private LocalTime startTime;
-private LocalTime endTime;
-private String movieTitle;
+    private LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private String movieTitle;
 
     @ManyToOne
     @JoinColumn(name = "movie_id", nullable = false)
     private Movie movie;
+
+    @ManyToOne
+    @JoinColumn(name = "theater_id", nullable = false)
+    private Theater theater;
 
     public Showing() {
     }

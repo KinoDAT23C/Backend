@@ -20,6 +20,7 @@ public class Theater {
     private int totalRows;
     private int totalSeatsPerRow;
 
+
     public Theater() {
     }
 }
