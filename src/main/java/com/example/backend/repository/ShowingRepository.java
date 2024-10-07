@@ -14,4 +14,5 @@ public interface ShowingRepository extends JpaRepository<Showing, Long> {
     List<Showing> findByTheater_TheaterId(Long theaterId);
     List<Showing> findByMovie_MovieId(Long movieId);
     List<Showing> findByDateBetween(LocalDate startDate, LocalDate endDate);
+    List<Showing> findByDate(LocalDate date);
 }

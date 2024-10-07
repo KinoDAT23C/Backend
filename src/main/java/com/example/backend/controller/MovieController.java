@@ -15,6 +15,7 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
+
     @GetMapping
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
@@ -29,5 +30,23 @@ public class MovieController {
     public List<Movie> getAvailableMovies() {
         List<Movie> movies = movieRepository.findAll();
         return movies;
+    }
+
+    // Endpoint for at opdatere imageUrl for en bestemt film
+    @PatchMapping("/{movieId}/updateImage")
+    public ResponseEntity<Movie> updateMovieImageUrl(
+            @PathVariable Long movieId,
+            @RequestParam String imageUrl) {
+
+        // Find filmen baseret på movieId
+        Movie movie = movieRepository.findById(movieId)
+                .orElseThrow(() -> new RuntimeException("Film ikke fundet med id " + movieId));
+
+        // Opdater imageUrl for den fundne film
+        movie.setImageUrl(imageUrl);
+
+        // Gem den opdaterede film
+        Movie updatedMovie = movieRepository.save(movie);
+        return ResponseEntity.ok(updatedMovie);
     }
 }

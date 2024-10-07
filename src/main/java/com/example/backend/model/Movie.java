@@ -19,6 +19,7 @@ public class Movie {
     private int ageRestriction;
     private int duration;
     private String description;
+    private String imageUrl; // Ny kolonne til billedets URL
 
     public Movie() {
     }
