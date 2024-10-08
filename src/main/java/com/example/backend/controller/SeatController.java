@@ -7,6 +7,8 @@ import com.example.backend.repository.SeatRepository;
 import com.example.backend.repository.ShowingRepository;
 import com.example.backend.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,4 +85,12 @@ public class SeatController {
         Seat updatedSeat = seatRepository.save(seat);
         return ResponseEntity.ok(updatedSeat);
     }
+
+    @GetMapping("/available-seats/{showingId}")
+    public List<Seat> getAvailableSeats(@PathVariable Long showingId, @RequestParam Long theaterId) {
+        return seatRepository.findAvailableSeats(showingId, theaterId);
+    }
+
+
+
 }

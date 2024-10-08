@@ -7,6 +7,7 @@ import com.example.backend.repository.ReservationRepository;
 import com.example.backend.repository.SeatRepository;
 import com.example.backend.repository.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +42,4 @@ public class ReservationController {
         return ResponseEntity.ok(savedReservation);
 
     }
-
 }
