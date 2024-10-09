@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/movies")
@@ -22,9 +23,23 @@ public class MovieController {
     }
 
     @PostMapping
-    public Movie createMovie(@RequestBody Movie movie) {
-        return movieRepository.save(movie);
+    public ResponseEntity<String> createMovie(@RequestBody Movie movie) {
+        movieRepository.save(movie);
+        return ResponseEntity.ok("Film tilføjet med succes!");
     }
+    @DeleteMapping("/{movieId}")
+    public ResponseEntity<String> deleteMovie(@PathVariable Long movieId) {
+        Optional<Movie> movieOptional = movieRepository.findById(movieId);
+
+        if (movieOptional.isPresent()) {
+            movieRepository.deleteById(movieId);
+            return ResponseEntity.ok("Film slettet med succes!");
+        } else {
+            return ResponseEntity.status(404).body("Film ikke fundet.");
+        }
+    }
+
+
 
     @GetMapping("/available")
     public List<Movie> getAvailableMovies() {
@@ -49,4 +64,5 @@ public class MovieController {
         Movie updatedMovie = movieRepository.save(movie);
         return ResponseEntity.ok(updatedMovie);
     }
+
 }
