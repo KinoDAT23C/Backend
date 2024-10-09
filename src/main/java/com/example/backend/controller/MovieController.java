@@ -18,7 +18,8 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getAllMovies() {
-        return movieRepository.findAll();
+        List<Movie> movies = movieRepository.findAll();
+        return movies;
     }
 
     @PostMapping
