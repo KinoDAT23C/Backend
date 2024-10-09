@@ -28,13 +28,6 @@ public class SeatController {
     private ShowingRepository showingRepository;
 
 
-    @GetMapping("/theater/{theaterId}") // viser os alle sæderne som er forbundet til en sal. Dog er "showing: null" på alle sæder da det ikke er integreret endnu
-    public ResponseEntity<List<Seat>> getSeatsByTheater(@PathVariable Long theaterId) {
-        Theater theater = theaterRepository.findById(theaterId)
-                .orElseThrow(() -> new RuntimeException("Theater not found with id " + theaterId));
-        List<Seat> seats = seatRepository.findByTheater(theater);
-        return ResponseEntity.ok(seats);
-    }
     @GetMapping("/showing/{showingId}") // virker ikke endnu. Der mangler et PostMapping endpoint i showings så de kan blive oprettet.
     public ResponseEntity<List<Seat>> getSeatsByShowing(@PathVariable Long showingId) {
         Showing showing = showingRepository.findById(showingId)

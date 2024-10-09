@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/theaters")
 public class TheaterController {
@@ -17,6 +19,14 @@ public class TheaterController {
 
     @Autowired
     private SeatRepository seatRepository;
+
+
+    @GetMapping("/{theaterId}")
+    public ResponseEntity<Theater> getTheaterById(@PathVariable Long theaterId) {
+        Theater theater = theaterRepository.findById(theaterId)
+                .orElseThrow(() -> new RuntimeException("Theater not found with id " + theaterId));
+        return ResponseEntity.ok(theater);
+    }
 
     @PostMapping // skaber den lille og store biograf sal
     public ResponseEntity<Theater> createTheater(@RequestBody Theater theater) {
