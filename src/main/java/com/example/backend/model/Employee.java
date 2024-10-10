@@ -17,6 +17,7 @@ public class Employee {
 private Long employeeId;
 
 private String name;
+private String password;
 private String role;
 
     public Employee() {

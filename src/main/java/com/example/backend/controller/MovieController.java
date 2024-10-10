@@ -3,6 +3,7 @@ package com.example.backend.controller;
 import com.example.backend.model.Movie;
 import com.example.backend.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,7 @@ public class MovieController {
 
     @GetMapping
     public List<Movie> getAllMovies() {
-        List<Movie> movies = movieRepository.findAll();
-        return movies;
+        return movieRepository.findAll();
     }
 
     @PostMapping
@@ -50,4 +50,33 @@ public class MovieController {
         Movie updatedMovie = movieRepository.save(movie);
         return ResponseEntity.ok(updatedMovie);
     }
+
+    @PostMapping("/createWithImage") // Gør de to overstående endpoints overflødige
+    public ResponseEntity<Movie> createMovieWithImage(
+            @RequestBody Movie movie,
+            @RequestParam String imageUrl) {
+
+        // Sæt imageUrl på det nye Movie-objekt
+        movie.setImageUrl(imageUrl);
+
+        // Gem filmen med billedet
+        Movie createdMovie = movieRepository.save(movie);
+
+        return ResponseEntity.ok(createdMovie);
+    }
+
+    @DeleteMapping("/{movieId}")
+    public ResponseEntity<String> deleteMovie(@PathVariable Long movieId) {
+        // Tjek om filmen findes
+        boolean exists = movieRepository.existsById(movieId);
+        if (!exists) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Film ikke fundet med id " + movieId);
+        }
+
+        // Slet filmen
+        movieRepository.deleteById(movieId);
+
+        return ResponseEntity.ok("Film med id " + movieId + " er blevet slettet.");
+    }
+
 }
